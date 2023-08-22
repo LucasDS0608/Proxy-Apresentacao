@@ -3,7 +3,7 @@ class PaymentProxy {
   bool permicaoUsuario = true;
 
   PaymentProxy(this.pagamentoEscolhido);
-  
+
   String get selectedPayment => (pagamentoEscolhido ?? "");
 
   void set selectedPayment(String value) {

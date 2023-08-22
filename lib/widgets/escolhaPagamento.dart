@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:proxyexample/models/pagamentoModel.dart';
-import 'package:proxyexample/screens/homePage.dart';
 import 'package:proxyexample/widgets/shoppingCartWidget.dart';
 import 'package:proxyexample/models/proxyModel.dart';
 
@@ -75,13 +74,16 @@ class _EscolhaPagamentoState extends State<EscolhaPagamento> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                ShoppingCartWidget.of(context)!.products.clear();
-                Navigator.of(context).popUntil((route) => route.isFirst);
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('Compra realizada via ${pagamentoSelecionado.selectedPayment!}'),
-                )
-                );
+
+                if(pagamentoSelecionado.permicaoUsuario){
+                  ShoppingCartWidget.of(context)!.products.clear();
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Compra realizada via ${pagamentoSelecionado.selectedPayment!}'),
+                  ));
+                }
+
               },
               child: Text('Comprar'),
             ),
