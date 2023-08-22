@@ -75,21 +75,13 @@ class _EscolhaPagamentoState extends State<EscolhaPagamento> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Compra Realizada\nCompra realizada no estilo de pagamento ${pagamentoSelecionado.selectedPayment!}'),
-                    );
-                  },
+                ShoppingCartWidget.of(context)!.products.clear();
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Compra realizada via ${pagamentoSelecionado.selectedPayment!}'),
+                )
                 );
-                ShoppingCartWidget.of(context)!.total == 0;
-                Navigator.of(context).pop();
-                //ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //content: Text('Compra realizada'),
-                //)
-                //);
               },
               child: Text('Comprar'),
             ),
